@@ -1,6 +1,7 @@
 package com.example.programming_engineering_lab2.solver;
 
 
+import com.example.programming_engineering_lab2.exception.NoSolutionFoundException;
 import com.example.programming_engineering_lab2.util.FillominoSolver;
 import org.junit.Test;
 
@@ -33,7 +34,7 @@ public class FillominoSolverUnitTest {
         solver.solve();
         assertFalse(!isArraysEqual(puzzle, initialPuzzle));
     }
-    @Test(expected = StackOverflowError.class)
+    @Test(expected = NoSolutionFoundException.class)
     public void exceptionTest() {
         int puzzle[][] =  {
                 {0, 0},

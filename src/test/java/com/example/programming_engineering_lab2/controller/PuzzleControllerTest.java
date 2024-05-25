@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -63,7 +64,7 @@ public class PuzzleControllerTest {
 
         assertEquals(responseEntity.getBody().toString(), "{\"first\":15,\"second\":22}");
     }
-    @Test(expected = StackOverflowError.class)
+    @Test
     public void solvePuzzleExceptionTest()  {
         ArrayToJsonConverter arrayToJsonConverter = mock(ArrayToJsonConverter.class);
         JsonToArrayConverter jsonConverter = mock(JsonToArrayConverter.class);
@@ -78,7 +79,8 @@ public class PuzzleControllerTest {
 
 
         ResponseEntity  actualResult = puzzleController.solvePuzzle(testUUID, conditions);
-        assertEquals(result, actualResult.toString());
+
+        assertEquals(new ResponseEntity<>(result, HttpStatus.OK).toString(), actualResult.toString());
     }
     @Test
     public void getPuzzleCondition() {
