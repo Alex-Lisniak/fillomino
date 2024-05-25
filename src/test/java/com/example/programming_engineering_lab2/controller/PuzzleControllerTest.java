@@ -9,6 +9,7 @@ import com.example.programming_engineering_lab2.service.impl.AuthKeyServiceImpl;
 import com.example.programming_engineering_lab2.service.impl.PuzzleServiceImpl;
 import com.example.programming_engineering_lab2.validation.AuthKeyValidator;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class PuzzleControllerTest {
         assertEquals(responseEntity.getBody().toString(), "{\"first\":15,\"second\":22}");
     }
     @Test(expected = StackOverflowError.class)
-    public void solvePuzzleExceptionTest()  {
+    public void solvePuzzleExceptionTest() throws JSONException {
         ArrayToJsonConverter arrayToJsonConverter = mock(ArrayToJsonConverter.class);
         JsonToArrayConverter jsonConverter = mock(JsonToArrayConverter.class);
         PuzzleController puzzleController = new PuzzleController(arrayToJsonConverter, jsonConverter, puzzleService, authKeyService, authKeyValidator);

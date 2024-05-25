@@ -1,12 +1,6 @@
-#FROM openjdk:17-jdk-alpine
-#LABEL authors="Lisniak O.M."
-#ARG JAR_FILE=target/*.jar
-#COPY ./target
-#ENTRYPOINT ["top", "-b"]
-FROM maven:3.8.5-openjdk-17 as builder
-WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline
-COPY src/ ./src/
-RUN mvn clean package -DskipTests=true
+FROM --platform=linux/x86_64 openjdk:17-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 
